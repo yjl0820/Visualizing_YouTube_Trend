@@ -1,0 +1,232 @@
+---
+title: "Final_of_Final" 
+author: "Daniel Jung, Yoojin Lim"
+output: html_notebook
+---
+
+## Front Matter
+```{r}
+# clean up workspace environment
+rm(list = ls())
+# all packages used for the assignment
+library(mosaicData)
+library(DataComputing)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+```
+
+## Guiding Question: Is there any correlation between number of likes, dislikes and comments on YouTube Videos? (Can we find any relationship between number of views, likes, dislikes and comments from YouTube videos?) 
+(1) We want to find whether there is any relationship bebtween number of views, likes, dislikes and comments from YouTube videos?
+(2) We want to know recent trend of YouTube viewers and their activity through data of views, likes, dislikes and comments
+(2) The data has time frame starting from Nov 2017 ending in June 2018.
+
+# Import data
+```{r}
+file_location <- file.choose()
+
+us_youtube_trend <- read.csv(file_location) %>%
+                        mutate(country = "US")
+
+file_location <- file.choose()
+
+ca_youtube_trend <- read.csv(file_location) %>%
+                        mutate(country = "CA")
+
+file_location <- file.choose()
+
+kr_youtube_trend <- read.csv(file_location) %>%
+                        mutate(country = "KR")
+
+youtube_trend <- rbind(us_youtube_trend, ca_youtube_trend)
+```
+Getting data from "USvideos.csv" and "CAvideos.csv" which is given by Mitchell J in Kaggle. The kaggle link is following: https://www.kaggle.com/datasnaek/youtube-new\. The data was originally collected for data sharing in Kaggle webpage about 2 years ago. Each case represent one trending YouTube video. For example, there is a row about YouTube video posted by Eminem. It was treding on Nov 14, 2017 and had views of 17158579, likes of 787425, dislikes of 43420, and comments of 125882. In our dataset, there are 40926 rows of trending YouTube videos. I plan to use variables "trending_date", "views", "likes", "dislikes", "comment_count", and "comment_disabled". The region is US AND Canada.
+
+# Clean data
+```{r}
+youtube_trend <- youtube_trend %>%
+                    filter(video_error_or_removed == "False") %>%
+                    mutate(trending_date = ydm(trending_date))
+```
+Remove videos that were removed or was confirmed to be an error. These videos are classified as "True" for column "video_error_or_removed"
+
+# Relationship between number of views, likes, dislikes, and comments in a single video
+```{r}
+ggplot(youtube_trend, aes(x = views, y = likes, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a logarithmic relationship between number of views and number of likes in a YouTube video.
+
+```{r}
+ggplot(youtube_trend, aes(x = views, y = dislikes, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a linear relationship between number of views and number of dislikes in YouTube videos. This means that it is evitable that there should be increase in dislikes when number of views increase. We can aslo see some videos have higer rate of increasing dislikes for certain amount of views.
+
+```{r}
+ggplot(youtube_trend, aes(x = views, y = comment_count, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a logarithmic (but very close to linear) relationship between number of views and number of comments in YouTube videos.
+
+```{r}
+ggplot(youtube_trend, aes(x = likes, y = dislikes, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a very straight linear relationship between number of likes and number of dislikes in YouTube videos.
+
+```{r}
+ggplot(youtube_trend, aes(x = likes, y = comment_count, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a very straight linear relationship between number of likes and number of cimments in YouTube videos.
+
+```{r}
+ggplot(youtube_trend, aes(x = dislikes, y = comment_count, color = country)) + geom_point()
+```
+We can see from the scatterplot that there seems to be a logarithmic relationship between number of dislikes and number of comment in YouTube videos.
+
+# Is there any relationship between disabling comment and number of dislikes a YouTube video received?
+```{r}
+com_dis <- youtube_trend %>%
+              filter(comments_disabled == "True")
+
+mean(com_dis$dislikes)
+mean(com_dis$likes)
+
+com_non_dis <- youtube_trend %>%
+                  filter(comments_disabled == "False")
+
+mean(com_non_dis$dislikes)
+mean(com_non_dis$likes)
+```
+The YouTube videos with comment disabled have average number of 1960.685 dislikes and average number of 17946.33 likes. YouTube videos with comment not disabled has average number of 2875.127 dislikes and average number of 57532.42 likes. We can see that videos that have comment disabled got much less likes and dislikes than vidoes that have comment enabled.
+
+# For YouTube videos with more dislikes than likes, do these videos have higer probability of disabling comments than videos that have more likes than dislikes?
+```{r}
+more_dislike <- youtube_trend %>%
+                  filter(dislikes > likes)
+more_like <- youtube_trend %>%
+                filter(likes > dislikes) %>%
+                sample_n(841)
+```
+As there are only 841 videos that have more dislikes than likes, we will also sample only 841 videos from list of videos that have more likes than dislikes.
+
+```{r}
+com_dis_df <- data.frame(Date=as.Date(character()),
+                 File=character(), 
+                 User=character(), 
+                 stringsAsFactors=FALSE) 
+
+nrow(more_dislike)
+
+com_dis_dis <- sum(more_dislike$comments_disabled == "True")
+com_dis_dis
+
+nrow(more_like)
+
+com_dis_non <- sum(more_like$comments_disabled == "True")
+com_dis_non
+```
+From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 11 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
+
+```{r}
+com_dis_df <- rbind(com_dis_df, c("more like", com_dis_non/nrow(more_like)), c("more dislike", com_dis_dis/nrow(more_dislike))) 
+
+colnames(com_dis_df) <- c("category", "proportion")
+
+com_dis_df
+```
+
+```{r}
+ggplot(com_dis_df, aes(x = category, y = proportion)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal()
+```
+We can see from this plot that YouTube vidoes that have more dislikes than likes have 4.8 times more probability that the video will disable comments.
+
+# Most popular YouTube channel
+## US Channels
+```{r}
+us_channel_pop <- us_youtube_trend %>%
+                    group_by(channel_title) %>%
+                    summarise(count = n()) %>%
+                    filter(count > 160)
+```
+In order to make our plot more readable, we will constraint the number of videos that were trending to be greater than 160.
+
+```{r}
+ggplot(us_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+```
+We can see from this plot that the most popular YouTube channel from Nov 2017 to June 2018 was ESPN. Also, show from Jimmy Fallon, Vox, Ellen show, Netflix were also very popular.
+
+## Canada Channels
+```{r}
+ca_channel_pop <- ca_youtube_trend %>%
+                    group_by(channel_title) %>%
+                    summarise(count = n()) %>%
+                    filter(count > 160)
+```
+In order to make our plot more readable, we will constraint the number of videos that were trending to be greater than 160.
+
+```{r}
+ggplot(ca_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+```
+We can see from this plot that the most popular YouTube channel from Nov 2017 to June 2018 was SET India. Also, videos from MSNBC, FBE, "The Young Turks" were also very popular.
+
+# YouTube channels with a single video having most views
+## US Channels
+```{r}
+us_channel_max <- us_youtube_trend %>%
+                    group_by(channel_title) %>%
+                    summarise(max = max(views)) %>%
+                    filter(max > 10**8)
+```
+
+```{r}
+ggplot(us_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+```
+The video from channel "ChildishGambinoVEVO" had the most views out of a single video with staggering two hundred million views.
+
+## Canada Channels
+```{r}
+ca_channel_max <- ca_youtube_trend %>%
+                    group_by(channel_title) %>%
+                    summarise(max = max(views)) %>%
+                    filter(max > 5*10**7)
+```
+
+```{r}
+ggplot(ca_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+```
+The video from channel "YouTube Spotlight" had the most views out of a single video with staggering one hundred million views.
+
+# Total views by trending date
+```{r}
+total_views_by_date <- youtube_trend %>%
+                          group_by(trending_date) %>%
+                          summarise(total_views = sum(views))
+```
+
+```{r}
+ggplot(total_views_by_date, aes(x = trending_date, y = total_views)) + geom_line(aes(x = trending_date, y = total_views, group = 1)) + theme_minimal()
+```
+We can see from this plot that the total number of views from trending videos have increases quite a bit since April.
+
+# Total likes and dislikes by trending date (YouTube sentiment)
+```{r}
+likes_dislikes <- youtube_trend %>%
+                    group_by(trending_date) %>%
+                    summarise(total_likes = sum(likes), total_dislikes = sum(dislikes), total_comments = sum(comment_count))
+
+likes_dislikes <- likes_dislikes %>%
+                    pivot_longer(cols = c(total_likes, total_dislikes, total_comments), names_to = "sentiment", values_to = "count")
+```
+
+```{r}
+ggplot(likes_dislikes, aes(x = trending_date, y = count, group = sentiment, colour = sentiment)) + geom_line(size = 1) + theme_minimal()
+```
+Total number of likes have also increase dramatically since April. It was interesting that the increase of dislikes have not been increased as much as likes. We could see that trending videos have generated tons of likes while not much change in dislikes.
+
+```{r}
+proportional_likes <- youtube_trend %>%
+                        group_by(trending_date) %>%
+                        summarise(total_likes = sum(likes), total_dislikes = sum(dislikes), total_comments = sum(comment_count))
+
+ggplot(proportional_likes, aes(x = trending_date, y = total_likes/total_dislikes)) + geom_line(size = 1) + theme_minimal()
+```
+However if we see this plot ,which plots the proportion of likes and dislikes for each day, we can see that there hasn't been a lot of change of proportion during the dates when data was recorded.
