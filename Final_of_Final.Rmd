@@ -240,40 +240,61 @@ However if we see this plot ,which plots the proportion of likes and dislikes fo
 # Top 10 Video Categories - Based on Views
 ## US Channels
 ```{r}
-us_channel_cat <- 
+us_channel_categ <- 
   aggregate(views~category_id, data = us_youtube_trend, sum)%>%
   arrange(desc(views)) %>%
   head(10)
 
-us_channel_cat
+us_channel_categ
 ```
 
 ## Canada Channels
 
 ```{r}
-ca_channel_cat <- 
+ca_channel_categ <- 
   aggregate(views~category_id, data = ca_youtube_trend, sum)%>%
   arrange(desc(views)) %>%
   head(10)
 
-ca_channel_cat
+ca_channel_categ
 ```
 
+
+
+# Top 5 Channels with highest reaction/response, based on the overall comments per view
+## US Channels
 
 ```{r}
-us_mutate <- us_youtube_trend %>%
-  mutate(new= ((comment_count/views)*1000))
+us_mutate <- 
+  mutate(us_youtube_trend, new= ((comment_count/views)*1000))
 
-us_mutate_categ <-aggregate(views~category_id, data = us_mutate, sum)%>%
+us_mutate_categ <-
+  us_mutate %>%
+  group_by(category_id) %>%
+  summarise(count= n(),total_probability = sum(new)) %>%
+  mutate(average_probability= (count/total_probability)) %>%
+  arrange(average_probability)
 
 us_mutate_categ
-#코멘트 나누기 뷰를 뮤테이트 해서 컬럼 만들고 카테고리 탑 10해서 일정 뷰당 코멘트 많은 수 탑 파이브) —> 디스라이크 
+
 
 ```
 
+## CA Channels
 
+```{r}
+ca_mutate <- 
+  mutate(ca_youtube_trend, new= ((comment_count/views)*1000))
 
+ca_mutate_categ <-
+  ca_mutate %>%
+  group_by(category_id) %>%
+  summarise(count= n(),total_probability = sum(new)) %>%
+  mutate(average_probability= (count/total_probability)) %>%
+  arrange(average_probability)
 
+ca_mutate_categ
+```
 
 
 
