@@ -1,5 +1,5 @@
 ---
-title: "Final_of_Final" 
+title: "STAT 184 - Final Project" 
 author: "Daniel Jung, Yoojin Lim"
 output: html_notebook
 ---
@@ -37,6 +37,17 @@ ca_youtube_trend <- read.csv(file_location) %>%
 youtube_trend <- rbind(us_youtube_trend, ca_youtube_trend)
 ```
 Getting data from "USvideos.csv" and "CAvideos.csv" which is given by Mitchell J in Kaggle. The kaggle link is following: https://www.kaggle.com/datasnaek/youtube-new\. The data was originally collected for data sharing in Kaggle webpage about 2 years ago. Each case represent one trending YouTube video. For example, there is a row about YouTube video posted by Eminem. It was treding on Nov 14, 2017 and had views of 17158579, likes of 787425, dislikes of 43420, and comments of 125882. In our dataset, there are 40926 rows of trending YouTube videos. I plan to use variables "trending_date", "views", "likes", "dislikes", "comment_count", and "comment_disabled". The region is US AND Canada.
+
+# Inspect data
+The six example rows are shown below
+```{r}
+head(youtube_trend)
+```
+
+These are the column names of "youtube_trend" data frame
+```{r}
+names(youtube_trend)
+```
 
 # Clean data
 ```{r}
