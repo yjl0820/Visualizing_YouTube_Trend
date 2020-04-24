@@ -130,7 +130,7 @@ nrow(more_like)
 com_dis_non <- sum(more_like$comments_disabled == "True")
 com_dis_non
 ```
-From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 11 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
+From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 13 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
 
 ```{r}
 com_dis_df <- rbind(com_dis_df, c("more like", com_dis_non/nrow(more_like)), c("more dislike", com_dis_dis/nrow(more_dislike))) 
@@ -144,6 +144,17 @@ com_dis_df
 ggplot(com_dis_df, aes(x = category, y = proportion)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal()
 ```
 We can see from this plot that YouTube vidoes that have more dislikes than likes have 4.8 times more probability that the video will disable comments.
+
+## Decision Tree
+```{r}
+dislike_decision <- youtube_trend %>%
+                        mutate(dislike_more = ifelse(dislikes > likes, "yes", "no"))
+```
+
+```{r}
+
+```
+
 
 # Most popular YouTube channel
 ## US Channels
