@@ -130,7 +130,7 @@ nrow(more_like)
 com_dis_non <- sum(more_like$comments_disabled == "True")
 com_dis_non
 ```
-From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 13 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
+From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 12 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
 
 ```{r}
 com_dis_df <- rbind(com_dis_df, c("more like", com_dis_non/nrow(more_like)), c("more dislike", com_dis_dis/nrow(more_dislike))) 
@@ -143,7 +143,7 @@ com_dis_df
 ```{r}
 ggplot(com_dis_df, aes(x = category, y = proportion)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal()
 ```
-We can see from this plot that YouTube vidoes that have more dislikes than likes have 4.8 times more probability that the video will disable comments.
+We can see from this plot that YouTube vidoes that have more dislikes than likes have 4.4 times (This number might differ by change in sample data) more probability that the video will disable comments.
 
 ## Decision Tree
 Get libaries needed for making decision tree
@@ -271,18 +271,20 @@ ggplot(proportional_likes, aes(x = trending_date, y = total_likes/total_dislikes
 However if we see this plot ,which plots the proportion of likes and dislikes for each day, we can see that there hasn't been a lot of change of proportion during the dates when data was recorded.
 
 # Top 10 Video Categories - Based on Views
-## Category id list
+We have collected actual category names for each category from YouTube webpage. 
 ```{r}
 categories_id <- c(1, 2, 10, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44)
 categories <- c("Film & Animation", "Autos & Vehicles", "Music", "Pets & Animals", "Sports", "Short Movies", "Travel & Events", "Gaming", "Videoblogging", "People & Blogs", "Comedy", "Entertainment", "News & Politics", "How-to & Style", "Education", "Science & Technology", "Nonprofits & Activism", "Movies", "Anime/Animation", "Action/Adventure", "Classics", "Comedy", "Documentary", "Drama", "Family", "Foreign", "Horror", "Sci-Fi/Fantasy", "Thriller", "Shorts", "Shows", "Trailers")
 ```
 
+Make data frame "category_id_list" by combining two vectors
 ```{r}
 category_id_list <- data.frame(cbind(categories_id, categories), stringsAsFactors=FALSE)
 
 colnames(category_id_list) <- c("category_id", "categories")
 ```
 
+Join data frame "category_id_list" with data frame "us_youtube_trend"
 ```{r}
 us_youtube_trend <- us_youtube_trend %>%
                       mutate(category_id = as.numeric(category_id))
@@ -294,6 +296,7 @@ us_youtube_trend <- us_youtube_trend %>%
                       left_join(category_id_list)
 ```
 
+Join data frame "category_id_list" with data frame "ca_youtube_trend"
 ```{r}
 ca_youtube_trend <- ca_youtube_trend %>%
                       mutate(category_id = as.numeric(category_id))
@@ -305,7 +308,7 @@ ca_youtube_trend <- ca_youtube_trend %>%
                       left_join(category_id_list)
 ```
 
-## US Channels
+## US Categories
 ```{r}
 us_channel_categ <- 
   aggregate(views~categories, data = us_youtube_trend, sum)%>%
@@ -314,8 +317,9 @@ us_channel_categ <-
 
 ggplot(us_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
 ```
+This shows that category "Music" is, by far, the most popular video category on YouTube in the US. The "Entertainment" and "Film & Animation" follows the lead behind "Music".
 
-## Canada Channels
+## Canada Categories
 ```{r}
 ca_channel_categ <- 
   aggregate(views~categories, data = ca_youtube_trend, sum)%>%
@@ -324,11 +328,10 @@ ca_channel_categ <-
 
 ggplot(ca_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
 ```
+This shows that category "Entertainment" is, by far, the most popular video category on Yotube in Canada. The "Music" and "Comedy" follows the lead behind "Entertainment".
 
-
-
-# Top 5 Channels with highest reaction/response, based on the overall comments per view
-## US Channels
+# Top 5 Categories with highest reaction/response, based on the overall comments per view
+## US Categories
 ```{r}
 us_reaction <- 
   mutate(us_youtube_trend, reaction = ((comment_count/views)*1000))
@@ -342,8 +345,9 @@ us_reaction_categ <-
 
 ggplot(us_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
 ```
+We have calculated the average reaction parameter for each categories of YouTube video in US. We can see from the plot that viewers of "Sports" category was the viewers with highest average reaction likelihood among all categories. This was followed by viewers of "Auto & Vehicles" and viewers of "Film & Animation".
 
-## CA Channels
+## CA Categories
 ```{r}
 ca_reaction <- 
   mutate(ca_youtube_trend, reaction = ((comment_count/views)*1000))
@@ -357,8 +361,4 @@ ca_reaction_categ <-
 
 ggplot(ca_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
 ```
-
-
-
-
-
+We have calculated the average reaction parameter for each categories of YouTube video in Canada. We can see from the plot that viewers of "Movies" category was the viewers with highest average reaction likelihood among all categories. This was followed by viewers of "Shows" and viewers of "Sports".
