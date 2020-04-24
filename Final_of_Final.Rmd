@@ -236,3 +236,46 @@ proportional_likes <- youtube_trend %>%
 ggplot(proportional_likes, aes(x = trending_date, y = total_likes/total_dislikes)) + geom_line(size = 1) + theme_minimal()
 ```
 However if we see this plot ,which plots the proportion of likes and dislikes for each day, we can see that there hasn't been a lot of change of proportion during the dates when data was recorded.
+
+# Top 10 Video Categories - Based on Views
+## US Channels
+```{r}
+us_channel_cat <- 
+  aggregate(views~category_id, data = us_youtube_trend, sum)%>%
+  arrange(desc(views)) %>%
+  head(10)
+
+us_channel_cat
+```
+
+## Canada Channels
+
+```{r}
+ca_channel_cat <- 
+  aggregate(views~category_id, data = ca_youtube_trend, sum)%>%
+  arrange(desc(views)) %>%
+  head(10)
+
+ca_channel_cat
+```
+
+
+```{r}
+us_mutate <- us_youtube_trend %>%
+  mutate(new= ((comment_count/views)*1000))
+
+us_mutate_categ <-aggregate(views~category_id, data = us_mutate, sum)%>%
+
+us_mutate_categ
+#코멘트 나누기 뷰를 뮤테이트 해서 컬럼 만들고 카테고리 탑 10해서 일정 뷰당 코멘트 많은 수 탑 파이브) —> 디스라이크 
+
+```
+
+
+
+
+
+
+
+
+
