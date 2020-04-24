@@ -59,32 +59,32 @@ Remove videos that were removed or was confirmed to be an error. These videos ar
 
 # Relationship between number of views, likes, dislikes, and comments in a single video
 ```{r}
-ggplot(youtube_trend, aes(x = views, y = likes, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = views, y = likes, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a logarithmic relationship between number of views and number of likes in a YouTube video.
 
 ```{r}
-ggplot(youtube_trend, aes(x = views, y = dislikes, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = views, y = dislikes, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a linear relationship between number of views and number of dislikes in YouTube videos. This means that it is evitable that there should be increase in dislikes when number of views increase. We can aslo see some videos have higer rate of increasing dislikes for certain amount of views.
 
 ```{r}
-ggplot(youtube_trend, aes(x = views, y = comment_count, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = views, y = comment_count, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a logarithmic (but very close to linear) relationship between number of views and number of comments in YouTube videos.
 
 ```{r}
-ggplot(youtube_trend, aes(x = likes, y = dislikes, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = likes, y = dislikes, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a very straight linear relationship between number of likes and number of dislikes in YouTube videos.
 
 ```{r}
-ggplot(youtube_trend, aes(x = likes, y = comment_count, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = likes, y = comment_count, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a very straight linear relationship between number of likes and number of cimments in YouTube videos.
 
 ```{r}
-ggplot(youtube_trend, aes(x = dislikes, y = comment_count, color = country)) + geom_point()
+ggplot(youtube_trend, aes(x = dislikes, y = comment_count, color = country)) + geom_point() + geom_smooth(method = "loess", se = FALSE)
 ```
 We can see from the scatterplot that there seems to be a logarithmic relationship between number of dislikes and number of comment in YouTube videos.
 
