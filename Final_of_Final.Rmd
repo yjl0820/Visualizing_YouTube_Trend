@@ -146,15 +146,37 @@ ggplot(com_dis_df, aes(x = category, y = proportion)) + geom_bar(stat = "identit
 We can see from this plot that YouTube vidoes that have more dislikes than likes have 4.8 times more probability that the video will disable comments.
 
 ## Decision Tree
+Get libaries needed for making decision tree
+```{r}
+library(multcomp)
+library(party)
+```
+
+Make another column that distinguishes whether the row has more dislikes than likes
 ```{r}
 dislike_decision <- youtube_trend %>%
                         mutate(dislike_more = ifelse(dislikes > likes, "yes", "no"))
 ```
 
+### Decision tree on how views, likes, comment count, and dislikes allows you to know whether the YouTube video has more dislikes than likes
 ```{r}
+tree <- dislike_decision %>%
+    ctree(dislike_more == "yes" ~ views + likes + comment_count + dislikes, data = ., controls = ctree_control(maxdepth = 3))
 
+plot(tree, type = "simple")
 ```
+There are some interesting output here.\
+If a YouTube video has more than 3773 dislikes and have views less than 467531, than it has probability of 61.9% that the video will have more dislikes than likes.\
+This means we can predict with the accuracy of about 62% whether a video has more dislikes than likes just by using number of dislikes and number of views.\
 
+### Decision tree on how views and comment count allows you to know whether the YouTube video has more dislikes than likes
+```{r}
+tree2 <- dislike_decision %>%
+    ctree(dislike_more == "yes" ~ views + comment_count, data = ., controls = ctree_control(maxdepth = 3))
+
+plot(tree2, type = "simple")
+```
+We can see from this decision tree that it is difficult to predict or categorize a video whether it has more dislikes than likes with just number of views and comment_count 
 
 # Most popular YouTube channel
 ## US Channels
