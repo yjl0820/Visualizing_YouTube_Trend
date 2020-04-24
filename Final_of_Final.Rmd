@@ -130,7 +130,7 @@ nrow(more_like)
 com_dis_non <- sum(more_like$comments_disabled == "True")
 com_dis_non
 ```
-From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 12 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
+From 841 YouTube videos that have more dislikes than likes, there are 53 videos that have their comments disabled. From 841 YouTube videos that have more likes than dislikes, there are 11 videos that have their comments disabled. (**The number of videos that have more likes than dislikes while comments are disabled might vary as the sample might change from sampling)
 
 ```{r}
 com_dis_df <- rbind(com_dis_df, c("more like", com_dis_non/nrow(more_like)), c("more dislike", com_dis_dis/nrow(more_dislike))) 
@@ -189,7 +189,7 @@ us_channel_pop <- us_youtube_trend %>%
 In order to make our plot more readable, we will constraint the number of videos that were trending to be greater than 160.
 
 ```{r}
-ggplot(us_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(us_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "channel")
 ```
 We can see from this plot that the most popular YouTube channel from Nov 2017 to June 2018 was ESPN. Also, show from Jimmy Fallon, Vox, Ellen show, Netflix were also very popular.
 
@@ -203,7 +203,7 @@ ca_channel_pop <- ca_youtube_trend %>%
 In order to make our plot more readable, we will constraint the number of videos that were trending to be greater than 160.
 
 ```{r}
-ggplot(ca_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(ca_channel_pop, aes(x = reorder(channel_title, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "channel")
 ```
 We can see from this plot that the most popular YouTube channel from Nov 2017 to June 2018 was SET India. Also, videos from MSNBC, FBE, "The Young Turks" were also very popular.
 
@@ -217,7 +217,7 @@ us_channel_max <- us_youtube_trend %>%
 ```
 
 ```{r}
-ggplot(us_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(us_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "channel")
 ```
 The video from channel "ChildishGambinoVEVO" had the most views out of a single video with staggering two hundred million views.
 
@@ -230,7 +230,7 @@ ca_channel_max <- ca_youtube_trend %>%
 ```
 
 ```{r}
-ggplot(ca_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(ca_channel_max, aes(x = reorder(channel_title, max), y = max)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "channel")
 ```
 The video from channel "YouTube Spotlight" had the most views out of a single video with staggering one hundred million views.
 
@@ -315,7 +315,7 @@ us_channel_categ <-
   arrange(desc(views)) %>%
   head(10)
 
-ggplot(us_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(us_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "category")
 ```
 This shows that category "Music" is, by far, the most popular video category on YouTube in the US. The "Entertainment" and "Film & Animation" follows the lead behind "Music".
 
@@ -326,7 +326,7 @@ ca_channel_categ <-
   arrange(desc(views)) %>%
   head(10)
 
-ggplot(ca_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(ca_channel_categ, aes(x = reorder(categories, views), y = views)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "category")
 ```
 This shows that category "Entertainment" is, by far, the most popular video category on Yotube in Canada. The "Music" and "Comedy" follows the lead behind "Entertainment".
 
@@ -343,7 +343,7 @@ us_reaction_categ <-
   mutate(average_reaction= (count/total_reaction)) %>%
   arrange(average_reaction)
 
-ggplot(us_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(us_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "category")
 ```
 We have calculated the average reaction parameter for each categories of YouTube video in US. We can see from the plot that viewers of "Sports" category was the viewers with highest average reaction likelihood among all categories. This was followed by viewers of "Auto & Vehicles" and viewers of "Film & Animation".
 
@@ -359,6 +359,6 @@ ca_reaction_categ <-
   mutate(average_reaction= (count/total_reaction)) %>%
   arrange(average_reaction)
 
-ggplot(ca_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip()
+ggplot(ca_reaction_categ, aes(x = reorder(categories, average_reaction), y = average_reaction)) + geom_bar(stat = "identity", fill = "steelblue") + theme_minimal() + coord_flip() + labs(x = "category")
 ```
 We have calculated the average reaction parameter for each categories of YouTube video in Canada. We can see from the plot that viewers of "Movies" category was the viewers with highest average reaction likelihood among all categories. This was followed by viewers of "Shows" and viewers of "Sports".
