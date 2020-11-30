@@ -21,6 +21,7 @@ The dataset has columns</br>
 <b>"ratings_disabled"</b>: whether the ratings are disabled</br>
 <b>"video_error_or_removed"</b>: is there an error with the video</br>
 <b>"description"</b>: text discription for the video</br>
+Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 
 ## 2. Team's Solution
 
