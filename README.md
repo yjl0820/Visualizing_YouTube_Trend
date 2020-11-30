@@ -25,27 +25,27 @@ Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 
 ## 3. Key Visualizations
 ![그림1](https://user-images.githubusercontent.com/56655511/100580590-90be5300-3329-11eb-84a8-e9af72017dc4.png)</br>
-This is a scatter ploy with trend line included with geom_smooth() function. The method was selected to "loess" which is local smooths. We chose this because this method showed most effective on the trend of the data points.</br>
+This is <b>scatter plot</b> with trend line included with geom_smooth() function. The <b>method</b> was selected to "loess" which is <b>local smooths</b>. We chose this because this method showed most effective on the trend of the data points.</br>
 ![그림2](https://user-images.githubusercontent.com/56655511/100580854-088c7d80-332a-11eb-947c-de4ec9b5ddf0.png)</br>
-This is a normal bar plot with "Whether there is more likes on the video or more dislikes on the video" on x-axis and proportion of having comment disabled on the y-axis.</br>
+This is a <b>normal bar plot</b> with "Whether there is more likes on the video or more dislikes on the video" on x-axis and proportion of having comment disabled on the y-axis.</br>
 ![그림3](https://user-images.githubusercontent.com/56655511/100581005-4ab5bf00-332a-11eb-9bdd-ca82527089f4.png)</br>
-This is a decision tree on how views and comment count allows you to know whether the YouTube video has more dislikes than likes.</br>
+This is a <b>decision tree</b> on how views and comment count allows you to know whether the YouTube video has more dislikes than likes.</br>
 We can see that it is difficult to categorize a video whether it has more dislikes than likes with just number of views and number of comments</br>
 ![그림4](https://user-images.githubusercontent.com/56655511/100581137-8ea8c400-332a-11eb-8069-7c5d051429e4.png)</br>
-This is a bar plot with coordinates flipped. The x-axis is title of channels and y-axis is the number of videos that became popular for each channel</br>
+This is a <b>bar plot</b> with coordinates flipped. The x-axis is title of channels and y-axis is the number of videos that became popular for each channel</br>
 ![그림5](https://user-images.githubusercontent.com/56655511/100581542-36be8d00-332b-11eb-8fc1-00fe0426a5b5.png)</br>
-This is time-series line graph. We can see the trend of total views of YouTube videos in the dataset in trending date</br>
+This is <b>time-series line graph</b>. We can see the trend of total views of YouTube videos in the dataset in trending date</br>
 ![그림6](https://user-images.githubusercontent.com/56655511/100581700-75544780-332b-11eb-9497-1a05c103e158.png)</br>
-This is time-series line graph with trending date as x-axis and count on y-axis. The line graphs are grouped into three sentiment indicators (comments, dislikes, likes)</br>
+This is <b>time-series line graph</b> with trending date as x-axis and count on y-axis. The line graphs are grouped into three sentiment indicators (comments, dislikes, likes)</br>
 
 ## 4. Key insights/takeaways about research question
-1) We can see that YouTube videos that have more dislikes than likes have about 4 times more probability that the video will disable comments</br>
-2) We cannot predict whether there are more likes than dislikes just by number of comments</br>
-3) The number of likes went up much faster than number of dislikes or number of comment in YouTube videos</br>
-4) The proportion of likes and dislikes have been approximately constant throughout time</br>
-5) Music and Entertainment have been most popular YouTube categories in both US and Canada</br>
-6) Sports and Auto category have been most highlt reacted (by comment) in US</br>
-7) Movies and Shows category have been most highly reacted (by comment) in Canada</br>
+1) We can see that YouTube videos that have <b>more dislikes than likes</b> have about <b>4 times more probability</b> that the video will <b>disable comments</b></br>
+2) We <b>cannot predict</b> whether there are more <b>likes than dislikes</b> just by <b>number of comments</b></br>
+3) The <b>number of likes</b> went up <b>much faster</b> than number of dislikes or number of comment in YouTube videos</br>
+4) The <b>proportion of likes and dislikes</b> have been approximately <b>constant</b> throughout time</br>
+5) <b>Music and Entertainment</b> have been <b>most popular YouTube categories</b> in both <b>US and Canada</b></br>
+6) <b>Sports and Auto category</b> have been <b>most highlt reacted</b> (by comment) in <b>US</b></br>
+7) <b>Movies and Shows category</b> have been <b>most highly reacted</b> (by comment) in <b>Canada</b></br>
 
 ## 4. Challenges to be overcomed
 1) There were <b>fewer</b> than expected <b>columns</b> of data for us to analyze</br>
