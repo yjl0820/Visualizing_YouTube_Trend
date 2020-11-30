@@ -24,6 +24,10 @@ The dataset has columns</br>
 Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 
 ## 3. Key Visualizations
+![그림1](https://user-images.githubusercontent.com/56655511/100580590-90be5300-3329-11eb-84a8-e9af72017dc4.png)
+This is a scatter ploy with trend line included with geom_smooth() function. The method was selected to "loess" which is local smooths. We chose this because this method showed most effective on the trend of the data points.</br>
+
+
 
 
 ## 3. Conclusion
