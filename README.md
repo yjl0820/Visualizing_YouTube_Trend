@@ -31,6 +31,8 @@ This is a normal bar plot with "Whether there is more likes on the video or more
 ![그림3](https://user-images.githubusercontent.com/56655511/100581005-4ab5bf00-332a-11eb-9bdd-ca82527089f4.png)</br>
 This is a decision tree on how views and comment count allows you to know whether the YouTube video has more dislikes than likes.</br>
 We can see that it is difficult to categorize a video whether it has more dislikes than likes with just number of views and number of comments</br>
+![그림4](https://user-images.githubusercontent.com/56655511/100581137-8ea8c400-332a-11eb-8069-7c5d051429e4.png)</br>
+This is a bar plot with coordinates flipped. The x-axis is title of channels and y-axis is the number of videos that became popular for each channel</br>
 
 
 ## 3. Conclusion
