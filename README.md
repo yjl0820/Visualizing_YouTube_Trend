@@ -33,6 +33,8 @@ This is a decision tree on how views and comment count allows you to know whethe
 We can see that it is difficult to categorize a video whether it has more dislikes than likes with just number of views and number of comments</br>
 ![그림4](https://user-images.githubusercontent.com/56655511/100581137-8ea8c400-332a-11eb-8069-7c5d051429e4.png)</br>
 This is a bar plot with coordinates flipped. The x-axis is title of channels and y-axis is the number of videos that became popular for each channel</br>
+![그림5](https://user-images.githubusercontent.com/56655511/100581542-36be8d00-332b-11eb-8fc1-00fe0426a5b5.png)</br>
+This is time-series line graph. We can see the trend of total views of YouTube videos in the dataset in trending date</br>
 
 
 ## 3. Conclusion
