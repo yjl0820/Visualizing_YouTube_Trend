@@ -5,7 +5,7 @@ From the start of a video sharing platform, YouTube in 2005, YouTube has been a 
 
 ## 2. About data set
 The dataset has columns</br>
-"video_id": private key of each videos</br>
+<b>"video_id"</b>: private key of each videos</br>
 "trending_date": date of the video trending</br>
 "title": title of the video</br>
 "channel_title": name of the channel that posted the video</br>
