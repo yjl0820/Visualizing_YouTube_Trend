@@ -48,11 +48,11 @@ This is time-series line graph with trending date as x-axis and count on y-axis.
 7) Movies and Shows category have been most highly reacted (by comment) in Canada</br>
 
 ## 4. Challenges to be overcomed
-1) There were fewer than expected columns of data for us to analyze</br>
+1) There were <b>fewer</b> than expected <b>columns</b> of data for us to analyze</br>
 : Much more diverse columns would have allowed us to be more creative on analysis</br>
-2) Large dataset leading longer loading time</br>
+2) <b>Large</b> dataset leading longer loading <b>time</b></br>
 : It was quite time consuming to call two large dataset and call other data frame formed from the imported data</br>
-3) Could not get optimal decision tree</br>
+3) Could not get <b>optimal decision tree</b></br>
 : We could not find how to get optimal decision tree in R</br>
 
 ## Reference
