@@ -38,7 +38,14 @@ This is time-series line graph. We can see the trend of total views of YouTube v
 ![그림6](https://user-images.githubusercontent.com/56655511/100581700-75544780-332b-11eb-9497-1a05c103e158.png)</br>
 This is time-series line graph with trending date as x-axis and count on y-axis. The line graphs are grouped into three sentiment indicators (comments, dislikes, likes)</br>
 
-## 3. Conclusion
+## 4. Key insights/takeaways about research question
+1) We can see that YouTube videos that have more dislikes than likes have about 4 times more probability that the video will disable comments</br>
+2) We cannot predict whether there are more likes than dislikes just by number of comments</br>
+3) The number of likes went up much faster than number of dislikes or number of comment in YouTube videos</br>
+4) The proportion of likes and dislikes have been approximately constant throughout time</br>
+5) Music and Entertainment have been most popular YouTube categories in both US and Canada</br>
+6) Sports and Auto category have been most highlt reacted (by comment) in US</br>
+7) Movies and Shows category have been most highly reacted (by comment) in Canada</br>
 
 ## 4. Challenges to be overcomed
 1) There were fewer than expected columns of data for us to analyze</br>
