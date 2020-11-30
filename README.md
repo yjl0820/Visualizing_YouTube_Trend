@@ -35,7 +35,8 @@ We can see that it is difficult to categorize a video whether it has more dislik
 This is a bar plot with coordinates flipped. The x-axis is title of channels and y-axis is the number of videos that became popular for each channel</br>
 ![그림5](https://user-images.githubusercontent.com/56655511/100581542-36be8d00-332b-11eb-8fc1-00fe0426a5b5.png)</br>
 This is time-series line graph. We can see the trend of total views of YouTube videos in the dataset in trending date</br>
-
+![그림6](https://user-images.githubusercontent.com/56655511/100581700-75544780-332b-11eb-9497-1a05c103e158.png)</br>
+This is time-series line graph with trending date as x-axis and count on y-axis. The line graphs are grouped into three sentiment indicators (comments, dislikes, likes)</br>
 
 ## 3. Conclusion
 
