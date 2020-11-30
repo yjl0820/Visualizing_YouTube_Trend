@@ -23,8 +23,17 @@ The dataset has columns</br>
 <b>"description"</b>: text discription for the video</br>
 Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 
-## 2. Team's Solution
+## 3. Key Visualizations
+
 
 ## 3. Conclusion
+
+## 4. Challenges to be overcomed
+1) There were fewer than expected columns of data for us to analyze</br>
+: Much more diverse columns would have allowed us to be more creative on analysis</br>
+2) Large dataset leading longer loading time</br>
+: It was quite time consuming to call two large dataset and call other data frame formed from the imported data</br>
+3) Could not get optimal decision tree</br>
+: We could not find how to get optimal decision tree in R</br>
 
 ## Reference
