@@ -26,7 +26,8 @@ Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 ## 3. Key Visualizations
 ![그림1](https://user-images.githubusercontent.com/56655511/100580590-90be5300-3329-11eb-84a8-e9af72017dc4.png)</br>
 This is a scatter ploy with trend line included with geom_smooth() function. The method was selected to "loess" which is local smooths. We chose this because this method showed most effective on the trend of the data points.</br>
-
+![그림2](https://user-images.githubusercontent.com/56655511/100580854-088c7d80-332a-11eb-947c-de4ec9b5ddf0.png)</br>
+This is a normal bar plot with "Whether there is more likes on the video or more dislikes on the video" on x-axis and proportion of having comment disabled on the y-axis.</br>
 
 
 
