@@ -28,7 +28,9 @@ Link to the dataset: https://www.kaggle.com/datasnaek/youtube-new
 This is a scatter ploy with trend line included with geom_smooth() function. The method was selected to "loess" which is local smooths. We chose this because this method showed most effective on the trend of the data points.</br>
 ![그림2](https://user-images.githubusercontent.com/56655511/100580854-088c7d80-332a-11eb-947c-de4ec9b5ddf0.png)</br>
 This is a normal bar plot with "Whether there is more likes on the video or more dislikes on the video" on x-axis and proportion of having comment disabled on the y-axis.</br>
-
+![그림3](https://user-images.githubusercontent.com/56655511/100581005-4ab5bf00-332a-11eb-9bdd-ca82527089f4.png)</br>
+This is a decision tree on how views and comment count allows you to know whether the YouTube video has more dislikes than likes.</br>
+We can see that it is difficult to categorize a video whether it has more dislikes than likes with just number of views and number of comments</br>
 
 
 ## 3. Conclusion
